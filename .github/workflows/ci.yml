@@ -1,43 +1,13 @@
-name: CI - Test Python
+name: Deploy Portfolio to Railway
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
-
-    steps:
-      - name: Récupération du dépôt
-        uses: actions/checkout@v3
-
-      - name: Installation de Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.10'
-
-      - name: Installer les dépendances
-        run: pip install pytest
-
-      - name: Exécuter les tests
-        run: pytest --maxfail=1 --disable-warnings -v
-
-      - name: Vérifier la présence des tests
-        run: ls -R
-      
-      - name: Exécuter les tests
-        run: python -m pytest
-
-  cd:
-    name: 🚀 Continuous Deployment (Déploiement)
-    needs: test
-    runs-on: ubuntu-latest
-    if: success() 
 
     steps:
       - name: 📥 Cloner le dépôt
