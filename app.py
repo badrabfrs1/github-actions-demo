@@ -1,7 +1,8 @@
 import os
 from flask import Flask, render_template
 
-app = Flask(__name__, static_folder="static", template_folder="templates")
+# Définir Flask en utilisant 'assets/' comme dossier statique
+app = Flask(__name__, static_url_path='/assets', static_folder="assets", template_folder="templates")
 
 @app.route("/")
 def home():
