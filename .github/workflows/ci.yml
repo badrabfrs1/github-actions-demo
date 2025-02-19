@@ -25,4 +25,11 @@ jobs:
         run: pip install pytest
 
       - name: Exécuter les tests
-        run: pytest test_app.py
+        run: pytest --maxfail=1 --disable-warnings -v
+
+      - name: Vérifier la présence des tests
+        run: ls -R
+      
+      - name: Exécuter les tests
+        run: python -m pytest
+      
