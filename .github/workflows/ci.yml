@@ -32,4 +32,20 @@ jobs:
       
       - name: Exécuter les tests
         run: python -m pytest
-      
+
+  cd:
+    name: 🚀 Continuous Deployment (Déploiement)
+    needs: test
+    runs-on: ubuntu-latest
+    if: success() 
+
+    steps:
+      - name: 📥 Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: 🚀 Déployer sur Railway
+        run: |
+          curl -X POST "https://backboard.railway.app/graphql/v2" \
+          -H "Authorization: Bearer $7171fad1-8135-4830-b270-e706739d61fe" \
+          -H "Content-Type: application/json" \
+          --data '{ "query": "mutation { deploymentCreate(input: { projectId: \"honest-playfulness\" }) { id } }" }'
